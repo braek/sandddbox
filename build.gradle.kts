@@ -17,6 +17,7 @@ allprojects {
         mavenCentral()
     }
 }
+
 subprojects {
     apply(plugin = "kotlin")
 
