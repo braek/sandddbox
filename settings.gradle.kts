@@ -2,6 +2,8 @@
  * Root project name
  */
 rootProject.name = "maxi-platform"
+
+
 /**
  * Dependencies
  */
@@ -13,6 +15,8 @@ dependencyResolutionManagement {
         }
     }
 }
+
+
 /**
  * Vocabulary
  */
