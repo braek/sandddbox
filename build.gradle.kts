@@ -1,9 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.2.21"
+    kotlin("jvm") version libs.versions.kotlin.get()
 }
-
-group = "be.koder"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -17,6 +14,10 @@ kotlin {
     jvmToolchain(21)
 }
 
-tasks.test {
-    useJUnitPlatform()
+subprojects {
+    apply(plugin = "kotlin")
+
+    tasks.test {
+        useJUnitPlatform()
+    }
 }

@@ -1,3 +1,3 @@
 package be.koder.maxi.vocabulary.network
 
-class CIDR
+class CIDR : Seed
