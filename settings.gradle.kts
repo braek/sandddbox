@@ -1,6 +1,5 @@
 rootProject.name = "maxi-platform"
 
-
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
