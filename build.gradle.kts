@@ -2,11 +2,6 @@ plugins {
     kotlin("jvm") version libs.versions.kotlin.get()
 }
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
-
 kotlin {
     jvmToolchain(21)
 }

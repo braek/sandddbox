@@ -17,12 +17,5 @@ dependencyResolutionManagement {
     }
 }
 
-pluginManagement {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
-
 include(":vocabulary")
 project(":vocabulary").projectDir = file("src/vocabulary")
