@@ -2,9 +2,17 @@ rootProject.name = "maxi-platform"
 
 dependencyResolutionManagement {
     versionCatalogs {
+        /**
+         * Regular libraries
+         */
         create("libs") {
-            // Versions
             version("kotlin", "2.3.10")
+        }
+        /**
+         * Libraries for testing
+         */
+        create("testLibs") {
+            version("junit", "6.0.3")
         }
     }
 }

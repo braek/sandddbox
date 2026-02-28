@@ -11,5 +11,6 @@ fun String.sanitizeMultiLineString(): String {
     return this.trim()
         .replace("\r", "")
         .replace("\t", "")
-        .replace("\n{2,}".toRegex(), "\r\n\r\n")
+        .replace("\n{2,}".toRegex(), "\n")
+        .replace("\n".toRegex(), "\r\n")
 }
