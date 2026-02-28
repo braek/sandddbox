@@ -1,11 +1,18 @@
+/**
+ * Kotlin plugin is needed to use Kotlin in the project
+ */
 plugins {
     kotlin("jvm") version libs.versions.kotlin.get()
 }
-
+/**
+ * Here you define what JDK version to compile the Kotlin code to
+ */
 kotlin {
     jvmToolchain(21)
 }
-
+/**
+ * Settings for subprojects
+ */
 subprojects {
     apply(plugin = "kotlin")
 
