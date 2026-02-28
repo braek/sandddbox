@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
 class CategoryTest {
 
@@ -13,10 +15,21 @@ class CategoryTest {
         assertEquals("Technology", category.toString())
     }
 
-    @Test
-    fun `should throw exception when creating category with empty string`() {
+    @ParameterizedTest
+    @ValueSource(
+        strings = [
+            "",
+            " ",
+            "\t",
+            "\r",
+            "\n",
+            "\r\n",
+            "\r\n\t\n\r\t\t\n",
+        ]
+    )
+    fun `should throw exception when creating category with empty string`(invalidInput: String) {
         assertThrows<IllegalArgumentException> {
-            Category.create("")
+            Category.create(invalidInput)
         }
     }
 

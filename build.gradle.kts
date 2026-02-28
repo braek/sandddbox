@@ -11,21 +11,20 @@ kotlin {
     jvmToolchain(21)
 }
 
-allprojects {
+subprojects {
+    apply(plugin = "kotlin")
+
     repositories {
         mavenLocal()
         mavenCentral()
     }
-}
-
-subprojects {
-    apply(plugin = "kotlin")
 
     dependencies {
         /**
          * JUnit API for WRITING test
          */
         testImplementation("org.junit.jupiter:junit-jupiter:${rootProject.testLibs.versions.junit.get()}")
+        testImplementation("org.junit.jupiter:junit-jupiter-params:${rootProject.testLibs.versions.junit.get()}")
         /**
          * JUnit Engine and Launcher for RUNNING tests
          */

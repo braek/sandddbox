@@ -1,16 +1,18 @@
 package be.koder.maxi.vocabulary
 
 fun String.sanitizeSingleLineString(): String {
-    return this.trim()
+    return this
         .replace("\n", "")
         .replace("\t", "")
         .replace("\r", "")
+        .trim()
 }
 
 fun String.sanitizeMultiLineString(): String {
-    return this.trim()
+    return this
         .replace("\r", "")
         .replace("\t", "")
         .replace("\n{2,}".toRegex(), "\n")
         .replace("\n".toRegex(), "\r\n")
+        .trim()
 }
