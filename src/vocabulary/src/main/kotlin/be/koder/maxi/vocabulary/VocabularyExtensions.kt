@@ -10,7 +10,8 @@ fun String.sanitizeSingleLineString(): String {
 fun String.sanitizeMultiLineString(): String {
     return this.replace("\r", "")
         .replace("\t", "")
-        .replace("\n{2,}".toRegex(), "\n")
+        .replace("\n{2,}".toRegex(), "\n\n")
+        .trim()
         .replace("\n".toRegex(), "\r\n")
         .trim()
 }
