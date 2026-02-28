@@ -23,7 +23,7 @@ subprojects {
 
     dependencies {
         /**
-         * JUnit API for WRITING test
+         * JUnit APIs for WRITING tests
          */
         testImplementation("org.junit.jupiter:junit-jupiter:${rootProject.testLibs.versions.junit.get()}")
         testImplementation("org.junit.jupiter:junit-jupiter-params:${rootProject.testLibs.versions.junit.get()}")

@@ -13,7 +13,7 @@ class Category private constructor(str: String) {
     init {
         val sanitized = str.sanitizeSingleLineString()
         require(sanitized.isNotEmpty()) {
-            "Cannot create Category from empty string"
+            "Cannot create ${javaClass.simpleName} from empty string"
         }
         this.value = sanitized
     }

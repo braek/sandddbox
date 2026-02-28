@@ -9,7 +9,7 @@ class Comment private constructor(str: String) {
     init {
         val sanitized = str.sanitizeMultiLineString()
         require(sanitized.isNotEmpty()) {
-            "Cannot create Comment from empty string"
+            "Cannot create ${javaClass.simpleName} from empty string"
         }
         this.value = sanitized
     }

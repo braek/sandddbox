@@ -8,10 +8,22 @@ class DnsLabel private constructor(str: String) {
 
     init {
         val sanitized = str.sanitizeSingleLineString().lowercase()
-        require(REGEXES.map { it.matches(sanitized) }.contains(true)) {
-            "Cannot create DNS label from string: '$str'"
+        require(isWildcard(sanitized) || isRegularDnsLabel(sanitized) || isUnderscoredDnsLabel(sanitized)) {
+            "Cannot create ${javaClass.simpleName} from invalid string: '$str'"
         }
         this.value = sanitized
+    }
+
+    private fun isWildcard(value: String): Boolean {
+        return value == "*"
+    }
+
+    private fun isRegularDnsLabel(value: String): Boolean {
+        return "^(?!-)[a-z-0-9]{1,63}(?<!-)$".toRegex().matches(value)
+    }
+
+    private fun isUnderscoredDnsLabel(value: String): Boolean {
+        return "^_(?!-)[a-z-0-9]{1,62}(?<!-)$".toRegex().matches(value)
     }
 
     override fun toString(): String {
@@ -30,24 +42,6 @@ class DnsLabel private constructor(str: String) {
     }
 
     companion object Factory {
-        /**
-         * Accepted regular expressions for DNS labels
-         */
-        private val REGEXES = setOf(
-            /**
-             * Single wildcards are possible
-             */
-            "^\\*$".toRegex(),
-            /**
-             * Regular host label: minimum 1 character, maximum 63 characters and cannot start or end with a hyphen
-             */
-            "^(?!-)[a-z-0-9]{1,63}(?<!-)$".toRegex(),
-            /**
-             * Host label starting with an underscore
-             */
-            "^_(?!-)[a-z-0-9]{1,62}(?<!-)$".toRegex(),
-        )
-
         fun create(str: String) = DnsLabel(str)
     }
 }
