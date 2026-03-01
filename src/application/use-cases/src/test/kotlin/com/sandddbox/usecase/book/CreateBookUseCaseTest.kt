@@ -1,5 +1,6 @@
 package com.sandddbox.usecase.book
 
+import com.sandddbox.api.CreateBook
 import com.sandddbox.api.CreateBookPresenter
 import com.sandddbox.domain.book.BookSnapshot
 import com.sandddbox.domain.book.ISBNService
@@ -23,9 +24,9 @@ import org.junit.jupiter.api.Test
 class CreateBookUseCaseTest {
 
     private val eventPublisher = InMemoryEventPublisher()
-    private val bookRepository: InMemoryBookRepository = InMemoryBookRepository()
+    private val bookRepository = InMemoryBookRepository()
     private val isbnService: ISBNService = bookRepository
-    private val useCase = CreateBookUseCase(isbnService, bookRepository, eventPublisher)
+    private val createBook: CreateBook = CreateBookUseCase(isbnService, bookRepository, eventPublisher)
 
     @BeforeEach
     fun setUp() {
@@ -43,16 +44,19 @@ class CreateBookUseCaseTest {
         private val isbn = ISBN.create("9780123456789")
         private val title = Title.create("Clean Code")
         private val description = Description.create("Clean Code is a book about writing clean code")
-        private val author = Author.create("Kristof Verbraeken")
+        private val authors = setOf(
+            Author.create("Kristof Verbraeken"),
+            Author.create("Joske Vermeulen")
+        )
 
         @BeforeEach
         fun setUp() {
-            useCase.createBook(
-                isbn,
-                title,
-                description,
-                setOf(author),
-                this
+            createBook.createBook(
+                isbn = isbn,
+                title = title,
+                description = description,
+                authors = authors,
+                presenter = this
             )
         }
 
@@ -70,7 +74,7 @@ class CreateBookUseCaseTest {
                 isbn,
                 title,
                 description,
-                setOf(author),
+                authors,
                 Version.initial()
             ))
         }
