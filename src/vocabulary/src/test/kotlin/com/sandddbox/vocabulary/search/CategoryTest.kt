@@ -1,7 +1,6 @@
-package be.koder.maxi.vocabulary.search
+package com.sandddbox.vocabulary.search
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotEquals
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -12,7 +11,7 @@ class CategoryTest {
     @Test
     fun `should create category with valid string`() {
         val category = Category.create("Technology")
-        assertEquals("Technology", category.toString())
+        Assertions.assertEquals("Technology", category.toString())
     }
 
     @ParameterizedTest
@@ -36,21 +35,21 @@ class CategoryTest {
     @Test
     fun `should sanitize input string`() {
         val category = Category.create("  Technology  ")
-        assertEquals("Technology", category.toString())
+        Assertions.assertEquals("Technology", category.toString())
     }
 
     @Test
     fun `should be equal when values are the same`() {
         val category1 = Category.create("Science")
         val category2 = Category.create("Science")
-        assertEquals(category1, category2)
-        assertEquals(category1.hashCode(), category2.hashCode())
+        Assertions.assertEquals(category1, category2)
+        Assertions.assertEquals(category1.hashCode(), category2.hashCode())
     }
 
     @Test
     fun `should not be equal when values are different`() {
         val category1 = Category.create("Science")
         val category2 = Category.create("Technology")
-        assertNotEquals(category1, category2)
+        Assertions.assertNotEquals(category1, category2)
     }
 }

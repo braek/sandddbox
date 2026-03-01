@@ -1,4 +1,4 @@
-package be.koder.maxi.vocabulary
+package com.sandddbox.vocabulary
 
 fun String.sanitizeSingleLineString(): String {
     return this.replace("\r", "")

@@ -1,4 +1,4 @@
-package be.koder.maxi.vocabulary.search
+package com.sandddbox.vocabulary.search
 
 enum class SearchEngine {
     SHODAN,

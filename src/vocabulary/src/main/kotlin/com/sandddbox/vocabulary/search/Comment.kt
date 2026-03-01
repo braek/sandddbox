@@ -1,17 +1,13 @@
-package be.koder.maxi.vocabulary.search
+package com.sandddbox.vocabulary.search
 
-import be.koder.maxi.vocabulary.sanitizeSingleLineString
+import com.sandddbox.vocabulary.sanitizeMultiLineString
 
-/**
- * This class is a candidate to become an enumeration in the future,
- * but for now it takes a custom value instead of fixed values.
- */
-class Category private constructor(str: String) {
+class Comment private constructor(str: String) {
 
     private val value: String
 
     init {
-        val sanitized = str.sanitizeSingleLineString()
+        val sanitized = str.sanitizeMultiLineString()
         require(sanitized.isNotEmpty()) {
             "Cannot create ${javaClass.simpleName} from empty string"
         }
@@ -25,7 +21,7 @@ class Category private constructor(str: String) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-        other as Category
+        other as Comment
         return value == other.value
     }
 
@@ -34,6 +30,6 @@ class Category private constructor(str: String) {
     }
 
     companion object Factory {
-        fun create(str: String) = Category(str)
+        fun create(str: String) = Comment(str)
     }
 }

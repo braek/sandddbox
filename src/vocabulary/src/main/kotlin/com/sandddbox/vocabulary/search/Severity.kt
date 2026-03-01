@@ -1,6 +1,6 @@
-package be.koder.maxi.vocabulary.search
+package com.sandddbox.vocabulary.search
 
-import be.koder.maxi.vocabulary.sanitizeSingleLineString
+import com.sandddbox.vocabulary.sanitizeSingleLineString
 
 /**
  * This class is a candidate to become an enumeration in the future,

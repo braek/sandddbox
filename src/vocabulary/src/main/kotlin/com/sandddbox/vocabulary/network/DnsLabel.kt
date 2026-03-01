@@ -1,6 +1,6 @@
-package be.koder.maxi.vocabulary.network
+package com.sandddbox.vocabulary.network
 
-import be.koder.maxi.vocabulary.sanitizeSingleLineString
+import com.sandddbox.vocabulary.sanitizeSingleLineString
 
 class DnsLabel private constructor(str: String) {
 
