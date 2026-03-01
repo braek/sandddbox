@@ -28,6 +28,10 @@ subprojects {
         testImplementation("org.junit.jupiter:junit-jupiter:${rootProject.testLibs.versions.junit.get()}")
         testImplementation("org.junit.jupiter:junit-jupiter-params:${rootProject.testLibs.versions.junit.get()}")
         /**
+         * API for better assertions
+         */
+        testImplementation("org.assertj:assertj-core:${rootProject.testLibs.versions.assertj.get()}")
+        /**
          * JUnit Engine and Launcher for RUNNING tests
          */
         testImplementation("org.junit.platform:junit-platform-engine:${rootProject.testLibs.versions.junit.get()}")

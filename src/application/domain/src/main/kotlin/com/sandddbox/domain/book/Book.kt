@@ -1,0 +1,57 @@
+package com.sandddbox.domain.book
+
+import com.sandddbox.domain.core.AggregateRoot
+import com.sandddbox.domain.core.Version
+import com.sandddbox.vocabulary.aggregate.BookId
+import com.sandddbox.vocabulary.book.Author
+import com.sandddbox.vocabulary.book.Description
+import com.sandddbox.vocabulary.book.ISBN
+import com.sandddbox.vocabulary.book.Title
+
+class Book private constructor(
+    private val id: BookId,
+    private val isbn: ISBN,
+    private val title: Title,
+    private val description: Description,
+    private val authors: Set<Author>,
+    private val version: Version
+) : AggregateRoot<BookId>() {
+
+    override fun getId(): BookId {
+        return id
+    }
+
+    fun takeSnapshot() = BookSnapshot(
+        id,
+        isbn,
+        title,
+        description,
+        authors.toSet(),
+        version
+    )
+
+    companion object {
+
+        fun create(isbn: ISBN, title: Title, description: Description, authors: Set<Author>): Book {
+            return Book(
+                id = BookId.generate(),
+                isbn = isbn,
+                title = title,
+                description = description,
+                authors = authors,
+                version = Version.initial()
+            )
+        }
+
+        fun fromSnapshot(snapshot: BookSnapshot): Book {
+            return Book(
+                id = snapshot.id,
+                isbn = snapshot.isbn,
+                title = snapshot.title,
+                description = snapshot.description,
+                authors = snapshot.authors,
+                version = snapshot.version
+            )
+        }
+    }
+}

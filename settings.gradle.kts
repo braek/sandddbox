@@ -13,6 +13,7 @@ dependencyResolutionManagement {
          */
         create("testLibs") {
             version("junit", "6.0.3")
+            version("assertj", "3.25.3")
         }
     }
 }
@@ -34,3 +35,6 @@ project(":queries").projectDir = file("src/application/queries")
 
 include(":test-doubles")
 project(":test-doubles").projectDir = file("src/test-doubles")
+
+include(":in-memory-adapter")
+project(":in-memory-adapter").projectDir = file("src/backend-adapters/in-memory-adapter")
