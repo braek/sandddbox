@@ -1,4 +1,4 @@
-rootProject.name = "maxi-platform"
+rootProject.name = "sandddbox"
 
 dependencyResolutionManagement {
     versionCatalogs {
