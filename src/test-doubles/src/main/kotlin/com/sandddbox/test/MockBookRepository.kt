@@ -20,7 +20,8 @@ class MockBookRepository : BookRepository, ISBNService {
     }
 
     override fun save(aggregateRoot: Book) {
-        data[aggregateRoot.getId()] = aggregateRoot.takeSnapshot()
+        val bookSnapshot = aggregateRoot.takeSnapshot()
+        data[aggregateRoot.getId()] = bookSnapshot.copy(version = bookSnapshot.version.increment())
     }
 
     override fun exists(isbn: ISBN): Boolean {
@@ -29,6 +30,10 @@ class MockBookRepository : BookRepository, ISBNService {
 
     fun verifySize(size: Int) {
         assertThat(data.size).isEqualTo(size)
+    }
+
+    fun verifyEmpty() {
+        verifySize(0)
     }
 
     fun clear() {

@@ -11,9 +11,9 @@ import com.sandddbox.vocabulary.book.Title
 class Book private constructor(
     private val id: BookId,
     private val isbn: ISBN,
-    private val title: Title,
-    private val description: Description,
-    private val authors: Set<Author>,
+    private var title: Title,
+    private var description: Description,
+    private val authors: MutableSet<Author>,
     private val version: Version
 ) : AggregateRoot<BookId>() {
 
@@ -30,6 +30,13 @@ class Book private constructor(
         version
     )
 
+    fun modify(title: Title, description: Description, authors: Set<Author>) {
+        this.title = title
+        this.description = description
+        this.authors.clear()
+        this.authors.addAll(authors)
+    }
+
     companion object {
 
         fun create(isbn: ISBN, title: Title, description: Description, authors: Set<Author>): Book {
@@ -38,7 +45,7 @@ class Book private constructor(
                 isbn = isbn,
                 title = title,
                 description = description,
-                authors = authors,
+                authors = authors.toMutableSet(),
                 version = Version.initial()
             )
         }
@@ -49,7 +56,7 @@ class Book private constructor(
                 isbn = snapshot.isbn,
                 title = snapshot.title,
                 description = snapshot.description,
-                authors = snapshot.authors,
+                authors = snapshot.authors.toMutableSet(),
                 version = snapshot.version
             )
         }

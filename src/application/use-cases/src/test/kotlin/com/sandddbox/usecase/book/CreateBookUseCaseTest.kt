@@ -75,7 +75,7 @@ class CreateBookUseCaseTest {
                 title,
                 description,
                 authors,
-                Version.initial()
+                Version.initial().increment()
             ))
         }
 
@@ -190,7 +190,7 @@ class CreateBookUseCaseTest {
 
         @Test
         fun `it should NOT be saved`() {
-            bookRepository.verifySize(0)
+            bookRepository.verifyEmpty()
         }
 
         @Test
