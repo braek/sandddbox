@@ -9,8 +9,8 @@ abstract class AggregateRoot<AGGREGATE_ROOT_ID : AggregateRootId> {
 
     abstract fun getId(): AGGREGATE_ROOT_ID
 
-    protected fun outbox(events: Event) {
-        this.outbox.add(events)
+    protected fun outbox(event: Event) {
+        this.outbox.add(event)
     }
 
     fun getOutbox(): List<Event> {

@@ -6,7 +6,6 @@ import com.sandddbox.domain.book.Book
 import com.sandddbox.domain.book.BookRepository
 import com.sandddbox.domain.book.ISBNService
 import com.sandddbox.domain.core.EventPublisher
-import com.sandddbox.domain.core.event.BookCreated
 import com.sandddbox.usecase.UseCase
 import com.sandddbox.usecase.command.CreateBookCommand
 import com.sandddbox.vocabulary.book.Author
@@ -40,7 +39,7 @@ class CreateBookUseCase(
             authors = command.authors
         )
         repository.save(book)
-        eventPublisher.publish(BookCreated(book.getId()))
+        eventPublisher.publish(book.getOutbox())
         presenter.created(book.getId())
     }
 }

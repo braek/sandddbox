@@ -4,7 +4,6 @@ import com.sandddbox.api.ModifyBook
 import com.sandddbox.api.ModifyBookPresenter
 import com.sandddbox.domain.book.BookRepository
 import com.sandddbox.domain.core.EventPublisher
-import com.sandddbox.domain.core.event.BookModified
 import com.sandddbox.usecase.UseCase
 import com.sandddbox.usecase.command.ModifyBookCommand
 import com.sandddbox.vocabulary.aggregate.BookId
@@ -33,7 +32,7 @@ class ModifyBookUseCase(
                 authors = command.authors
             )
             repository.save(it)
-            eventPublisher.publish(BookModified(command.bookId))
+            eventPublisher.publish(it.getOutbox())
             presenter.modified(command.bookId)
         } ?: presenter.bookDoesNotExist(command.bookId)
     }

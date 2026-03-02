@@ -2,6 +2,8 @@ package com.sandddbox.domain.book
 
 import com.sandddbox.domain.core.AggregateRoot
 import com.sandddbox.domain.core.Version
+import com.sandddbox.domain.core.event.BookCreated
+import com.sandddbox.domain.core.event.BookModified
 import com.sandddbox.vocabulary.aggregate.BookId
 import com.sandddbox.vocabulary.book.Author
 import com.sandddbox.vocabulary.book.Description
@@ -35,12 +37,13 @@ class Book private constructor(
         this.description = description
         this.authors.clear()
         this.authors.addAll(authors)
+        outbox(BookModified(id))
     }
 
     companion object {
 
         fun create(isbn: ISBN, title: Title, description: Description, authors: Set<Author>): Book {
-            return Book(
+            val book = Book(
                 id = BookId.generate(),
                 isbn = isbn,
                 title = title,
@@ -48,6 +51,8 @@ class Book private constructor(
                 authors = authors.toMutableSet(),
                 version = Version.initial()
             )
+            book.outbox(BookCreated(book.getId()))
+            return book
         }
 
         fun fromSnapshot(snapshot: BookSnapshot): Book {
