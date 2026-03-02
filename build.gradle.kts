@@ -30,7 +30,7 @@ subprojects {
         /**
          * API for better assertions
          */
-        testImplementation("org.assertj:assertj-core:${rootProject.testLibs.versions.assertj.get()}")
+        testImplementation(rootProject.testLibs.assertj)
         /**
          * JUnit Engine and Launcher for RUNNING tests
          */

@@ -7,5 +7,5 @@ dependencies {
     /**
      * For this module we need AssertJ on the regular scope (exceptionally)
      */
-    implementation("org.assertj:assertj-core:${rootProject.testLibs.versions.assertj.get()}")
+    implementation(rootProject.testLibs.assertj)
 }

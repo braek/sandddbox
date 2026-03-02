@@ -1,5 +1,6 @@
 package com.sandddbox.test
 
+import com.sandddbox.domain.core.EventHandler
 import com.sandddbox.domain.core.EventPublisher
 import com.sandddbox.domain.core.event.Event
 import org.assertj.core.api.Assertions.assertThat
@@ -8,9 +9,15 @@ import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguratio
 class MockEventPublisher : EventPublisher {
 
     private val publishedEvents = mutableListOf<Event>()
+    private val eventHandlers = mutableListOf<EventHandler>()
 
     override fun publish(event: Event) {
         publishedEvents.add(event)
+        eventHandlers.forEach { it.handle(event) }
+    }
+
+    fun subscribe(eventHandler: EventHandler) {
+        eventHandlers.add(eventHandler)
     }
 
     fun clear() {
