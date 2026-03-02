@@ -13,7 +13,7 @@ dependencyResolutionManagement {
          */
         create("testLibs") {
             version("junit", "6.0.3")
-            version("assertj", "3.25.3")
+            version("assertj", "3.27.7")
         }
     }
 }
