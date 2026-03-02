@@ -36,6 +36,10 @@ subprojects {
          */
         testImplementation("org.junit.platform:junit-platform-engine:${rootProject.testLibs.versions.junit.get()}")
         testImplementation("org.junit.platform:junit-platform-launcher:${rootProject.testLibs.versions.junit.get()}")
+        /**
+         * Our own test doubles
+         */
+        testImplementation(project(":test-doubles"))
     }
 
     tasks.test {
