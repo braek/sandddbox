@@ -7,25 +7,29 @@ import com.sandddbox.domain.book.ISBNService
 import com.sandddbox.vocabulary.aggregate.BookId
 import com.sandddbox.vocabulary.book.ISBN
 import org.assertj.core.api.Assertions.assertThat
+import java.util.concurrent.ConcurrentHashMap
 
 class MockBookRepository : BookRepository, ISBNService {
 
-    private val data = mutableMapOf<BookId, BookSnapshot>()
+    private val data = ConcurrentHashMap<BookId, BookSnapshot>()
 
     override fun getById(id: BookId): Book? {
-        if (data.containsKey(id)) {
-            return Book.fromSnapshot(data[id]!!)
-        }
-        return null
+        return data[id]?.let { Book.fromSnapshot(it) }
     }
 
     override fun save(aggregateRoot: Book) {
         val bookSnapshot = aggregateRoot.takeSnapshot()
-        data[aggregateRoot.getId()] = bookSnapshot.copy(version = bookSnapshot.version.increment())
+        val id = bookSnapshot.id
+        data.compute(id) { _, existing ->
+            if (existing != null && existing.version != bookSnapshot.version) {
+                throw IllegalStateException("Optimistic locking failed for book with id: $id")
+            }
+            bookSnapshot.copy(version = bookSnapshot.version.increment())
+        }
     }
 
     override fun exists(isbn: ISBN): Boolean {
-        return data.map { it.value.isbn }.contains(isbn)
+        return data.values.any { it.isbn == isbn }
     }
 
     fun verifySize(size: Int) {
