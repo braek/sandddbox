@@ -37,7 +37,7 @@ class Book private constructor(
         this.description = description
         this.authors.clear()
         this.authors.addAll(authors)
-        outbox(BookModified(id))
+        this.enqueue(BookModified(id))
     }
 
     companion object {
@@ -51,7 +51,7 @@ class Book private constructor(
                 authors = authors.toMutableSet(),
                 version = Version.initial()
             )
-            book.outbox(BookCreated(book.getId()))
+            book.enqueue(BookCreated(book.getId()))
             return book
         }
 
