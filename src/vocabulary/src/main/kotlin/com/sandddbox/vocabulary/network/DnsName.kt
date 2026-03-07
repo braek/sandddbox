@@ -86,6 +86,12 @@ class DnsName private constructor(str: String) : Seed, Comparable<DnsName> {
         return toString()
     }
 
+    fun wireFormat(): String {
+        val parts = this.dnsLabels.map { it.wireFormat() }.toMutableList()
+        parts.add("[0]")
+        return parts.joinToString(separator = " ").lowercase()
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

@@ -16,6 +16,8 @@ class DnsLabel private constructor(str: String) {
 
     fun isWildcard(): Boolean = REGEX_WILDCARD.matches(value)
 
+    fun wireFormat(): String = "[${value.length}]$value"
+
     override fun toString(): String {
         return value
     }
