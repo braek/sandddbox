@@ -9,7 +9,7 @@ class DnsLabel private constructor(str: String) {
     init {
         val sanitized = str.sanitizeSingleLineString().lowercase()
         require(WILDCARD_REGEX.matches(sanitized) || REGULAR_DNS_LABEL_REGEX.matches(sanitized) || UNDERSCORED_DNS_LABEL_REGEX.matches(sanitized)) {
-            "Cannot create ${javaClass.simpleName} from this string: '$str'"
+            "Cannot create ${javaClass.simpleName} from this string: '$sanitized'"
         }
         this.value = sanitized
     }

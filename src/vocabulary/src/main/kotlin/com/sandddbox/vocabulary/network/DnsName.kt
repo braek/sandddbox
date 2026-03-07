@@ -9,9 +9,9 @@ class DnsName private constructor(str: String) : Seed {
 
     init {
         /**
-         * Sanitize values
+         * Sanitize value
          */
-        val sanitized = str.sanitizeSingleLineString()
+        val sanitizedValue = str.sanitizeSingleLineString()
             .removeSuffix(DOT.toString())
             .removePrefix(DOT.toString())
             .lowercase()
@@ -20,13 +20,13 @@ class DnsName private constructor(str: String) : Seed {
          * Convert and validate DNS labels
          */
         val validDnsLabels = mutableListOf<DnsLabel>()
-        sanitized.split(DOT).forEachIndexed { index, rawDnsLabel ->
+        sanitizedValue.split(DOT).forEachIndexed { index, rawDnsLabel ->
             run {
                 try {
                     validDnsLabels.add(DnsLabel.create(rawDnsLabel))
                 } catch (_: IllegalArgumentException) {
                     throw IllegalArgumentException(
-                        "Cannot create ${javaClass.simpleName} from string: '$sanitized' because ${DnsLabel::class.java.simpleName} #${index + 1} is invalid: '$rawDnsLabel'"
+                        "Cannot create ${javaClass.simpleName} from string: '$sanitizedValue' because ${DnsLabel::class.java.simpleName} #${index + 1} is invalid: '$rawDnsLabel'"
                     )
                 }
             }
@@ -36,7 +36,7 @@ class DnsName private constructor(str: String) : Seed {
          * At least one DNS label is required
          */
         require(validDnsLabels.isNotEmpty()) {
-            "Cannot create ${javaClass.simpleName} from string: '$sanitized' - no DNS labels are present"
+            "Cannot create ${javaClass.simpleName} from string: '$sanitizedValue' - no DNS labels are present"
         }
 
         /**
@@ -48,7 +48,7 @@ class DnsName private constructor(str: String) : Seed {
          */
         val valueToBe = validDnsLabels.joinToString(separator = DOT.toString()).lowercase()
         require(valueToBe.length <= 253) {
-            "Cannot create ${javaClass.simpleName} from string: '$sanitized' - exceeds maximum length of 253 characters"
+            "Cannot create ${javaClass.simpleName} from string: '$sanitizedValue' - exceeds maximum length of 253 characters"
         }
 
         /**
@@ -58,7 +58,7 @@ class DnsName private constructor(str: String) : Seed {
          */
         val wildcards = validDnsLabels.map { it.isWildcard() }.count { it }
         require(wildcards == 0 || (wildcards == 1 && validDnsLabels.size > 2 && validDnsLabels.first().isWildcard())) {
-            "Cannot create ${javaClass.simpleName} from string: '$sanitized' - invalid use of wildcard"
+            "Cannot create ${javaClass.simpleName} from string: '$sanitizedValue' - invalid use of wildcard"
         }
 
         /**
