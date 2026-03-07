@@ -35,6 +35,7 @@ class DnsNameTest {
                 Arguments.of("WWW.GOOGLE.COM", "www.google.com", 3, false, "[3]www [6]google [3]com [0]"),
                 Arguments.of("\r\n\twww.TWEAKERS.net\r\n\t", "www.tweakers.net", 3, false, "[3]www [8]tweakers [3]net [0]"),
                 Arguments.of("VLAANDEREN.BE", "vlaanderen.be", 2, false, "[10]vlaanderen [2]be [0]"),
+                Arguments.of("xn--tst-qla.example.com", "xn--tst-qla.example.com", 3, false, "[11]xn--tst-qla [7]example [3]com [0]"),
                 Arguments.of("666.museum", "666.museum", 2, false, "[3]666 [6]museum [0]"),
                 Arguments.of("www.test.com", "www.test.com", 3, false, "[3]www [4]test [3]com [0]"),
                 Arguments.of("*.wildcard-domain.com", "*.wildcard-domain.com", 3, true, "[1]* [15]wildcard-domain [3]com [0]"),
