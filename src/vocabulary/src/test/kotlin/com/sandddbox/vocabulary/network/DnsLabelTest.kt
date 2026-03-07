@@ -14,10 +14,11 @@ class DnsLabelTest {
 
     @ParameterizedTest
     @MethodSource("validDnsLabels")
-    fun testValidDnsLabel(input: String, sanitized: String, isWildcard: Boolean) {
+    fun testValidDnsLabel(input: String, sanitized: String, isWildcard: Boolean, wireFormat: String) {
         val dnsLabel = DnsLabel.create(input)
         assertThat(dnsLabel.toString()).isEqualTo(sanitized)
         assertThat(dnsLabel.isWildcard()).isEqualTo(isWildcard)
+        assertThat(dnsLabel.wireFormat()).isEqualTo(wireFormat)
     }
 
     @ParameterizedTest
@@ -38,16 +39,16 @@ class DnsLabelTest {
         @JvmStatic
         fun validDnsLabels(): Stream<Arguments> {
             return Stream.of(
-                Arguments.of("ORG", "org", false),
-                Arguments.of("MUSEUM", "museum", false),
-                Arguments.of("\n\n\nB\n\rE\t\t\t\n", "be", false),
-                Arguments.of("\t\r\n666\t\r\n", "666", false),
-                Arguments.of("xn--mnchen-3ya", "xn--mnchen-3ya", false),
-                Arguments.of("_DMARC", "_dmarc", false),
-                Arguments.of("_ACME-challenge", "_acme-challenge", false),
-                Arguments.of("\t\r\n*\t\r\n", "*", true),
-                Arguments.of("123", "123", false),
-                Arguments.of("ABC456", "abc456", false),
+                Arguments.of("ORG", "org", false, "[3]org"),
+                Arguments.of("MUSEUM", "museum", false, "[6]museum"),
+                Arguments.of("\n\n\nB\n\rE\t\t\t\n", "be", false, "[2]be"),
+                Arguments.of("\t\r\n666\t\r\n", "666", false, "[3]666"),
+                Arguments.of("xn--mnchen-3ya", "xn--mnchen-3ya", false, "[14]xn--mnchen-3ya"),
+                Arguments.of("_DMARC", "_dmarc", false, "[6]_dmarc"),
+                Arguments.of("_ACME-challenge", "_acme-challenge", false, "[15]_acme-challenge"),
+                Arguments.of("\t\r\n*\t\r\n", "*", true, "[1]*"),
+                Arguments.of("123", "123", false, "[3]123"),
+                Arguments.of("ABC456", "abc456", false, "[6]abc456"),
             )
         }
     }
