@@ -13,13 +13,13 @@ class IpAddress private constructor(str: String) : Comparable<IpAddress> {
     private val value: IPAddress
 
     init {
-        val sanitized = sanitize(str)
-        if (isValidIPv4Address(sanitized)) {
-            this.value = this.createIPv4Address(sanitized)
-        } else if (isIPv6(sanitized)) {
-            this.value = this.createIPv6Address(sanitized)
+        val sanitizedValue = sanitize(str)
+        if (isValidIPv4Address(sanitizedValue)) {
+            this.value = this.createIPv4Address(sanitizedValue)
+        } else if (isIPv6(sanitizedValue)) {
+            this.value = this.createIPv6Address(sanitizedValue)
         } else {
-            throw IllegalArgumentException("Cannot create ${javaClass.simpleName} from string: '$sanitized'")
+            throw IllegalArgumentException("Cannot create ${javaClass.simpleName} from string: '$sanitizedValue'")
         }
     }
 
@@ -90,7 +90,7 @@ class IpAddress private constructor(str: String) : Comparable<IpAddress> {
         }
     }
 
-    fun getVersion(): Int {
+    fun getIpVersion(): Int {
         return when (value.ipVersion!!) {
             IPAddress.IPVersion.IPV4 -> 4
             IPAddress.IPVersion.IPV6 -> 6

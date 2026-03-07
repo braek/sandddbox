@@ -7,14 +7,14 @@ class DnsLabel private constructor(str: String) {
     private val value: String
 
     init {
-        val sanitized = str.sanitizeSingleLineString().lowercase()
-        require(WILDCARD_REGEX.matches(sanitized) || REGULAR_DNS_LABEL_REGEX.matches(sanitized) || UNDERSCORED_DNS_LABEL_REGEX.matches(sanitized)) {
-            "Cannot create ${javaClass.simpleName} from this string: '$sanitized'"
+        val sanitizedValue = str.sanitizeSingleLineString().lowercase()
+        require(REGEX_WILDCARD.matches(sanitizedValue) || REGEX_DNS_LABEL.matches(sanitizedValue) || REGEX_DNS_LABEL_WITH_UNDERSCORE.matches(sanitizedValue)) {
+            "Cannot create ${javaClass.simpleName} from this string: '$sanitizedValue'"
         }
-        this.value = sanitized
+        this.value = sanitizedValue
     }
 
-    fun isWildcard(): Boolean = WILDCARD_REGEX.matches(value)
+    fun isWildcard(): Boolean = REGEX_WILDCARD.matches(value)
 
     override fun toString(): String {
         return value
@@ -35,10 +35,9 @@ class DnsLabel private constructor(str: String) {
         /**
          * Regular expressions for the types of DNS labels
          */
-        private val WILDCARD_REGEX = "^\\*$".toRegex()
-        private val REGULAR_DNS_LABEL_REGEX = "^(?!-)[a-z-0-9]{1,63}(?<!-)$".toRegex()
-        private val UNDERSCORED_DNS_LABEL_REGEX = "^_(?!-)[a-z-0-9]{1,62}(?<!-)$".toRegex()
-
+        private val REGEX_WILDCARD = "^\\*$".toRegex()
+        private val REGEX_DNS_LABEL = "^(?!-)[a-z-0-9]{1,63}(?<!-)$".toRegex()
+        private val REGEX_DNS_LABEL_WITH_UNDERSCORE = "^_(?!-)[a-z-0-9]{1,62}(?<!-)$".toRegex()
         /**
          * Factory method
          */

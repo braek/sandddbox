@@ -2,7 +2,7 @@ package com.sandddbox.vocabulary.network
 
 import com.sandddbox.vocabulary.sanitizeSingleLineString
 
-class DnsName private constructor(str: String) : Seed {
+class DnsName private constructor(str: String) : Seed, Comparable<DnsName> {
 
     private val value: String
     private val dnsLabels: List<DnsLabel>
@@ -95,6 +95,10 @@ class DnsName private constructor(str: String) : Seed {
 
     override fun hashCode(): Int {
         return value.hashCode()
+    }
+
+    override fun compareTo(other: DnsName): Int {
+        return toString().compareTo(other.toString())
     }
 
     companion object {

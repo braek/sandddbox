@@ -1,8 +1,8 @@
 package com.sandddbox.vocabulary.network
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -24,12 +24,12 @@ class PortTest {
     ])
     fun testValidPort(input: Int) {
         val port = Port.create(input)
-        assertThat(port.value()).isEqualTo(input)
+        assertThat(port.getValue()).isEqualTo(input)
     }
 
     @ParameterizedTest
     @ValueSource(ints = [-1, 65536, 100000])
     fun testInvalidPort(input: Int) {
-        assertThatThrownBy { Port.create(input) }.isInstanceOf(IllegalArgumentException::class.java)
+        assertThrows<IllegalArgumentException> { Port.create(input) }
     }
 }

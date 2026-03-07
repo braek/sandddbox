@@ -30,7 +30,7 @@ class Port private constructor(value: Int) : Comparable<Port> {
         return value.compareTo(other.value)
     }
 
-    fun value(): Int = value
+    fun getValue(): Int = value
 
     companion object {
         fun create(value: Int) = Port(value)
