@@ -49,6 +49,7 @@ class DnsLabelTest {
                 Arguments.of("\t\r\n*\t\r\n", "*", true, "[1]*"),
                 Arguments.of("123", "123", false, "[3]123"),
                 Arguments.of("ABC456", "abc456", false, "[6]abc456"),
+                Arguments.of("aa--123--bb", "aa--123--bb", false, "[11]aa--123--bb"),
             )
         }
     }

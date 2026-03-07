@@ -41,6 +41,13 @@ class DnsNameTest {
                 Arguments.of("*.SUPERMAN.COM", "*.superman.com", 3, true, "[1]* [8]superman [3]com [0]"),
                 Arguments.of("\r\n\t_dmarc.test.com\r\n\t", "_dmarc.test.com", 3, false, "[6]_dmarc [4]test [3]com [0]"),
                 Arguments.of("_acme-challenge.sub.example.com", "_acme-challenge.sub.example.com", 4, false, "[15]_acme-challenge [3]sub [7]example [3]com [0]"),
+                Arguments.of(
+                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd.e",
+                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd.e",
+                    5,
+                    false,
+                    "[63]aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa [63]bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb [63]ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc [59]ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd [1]e [0]"
+                ),
             )
         }
 
