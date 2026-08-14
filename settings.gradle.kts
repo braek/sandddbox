@@ -6,7 +6,7 @@ dependencyResolutionManagement {
          * Regular libraries
          */
         create("libs") {
-            version("kotlin", "2.3.21")
+            version("kotlin", "2.4.10")
             version("springBoot", "4.1.0")
 
             plugin("spring-boot", "org.springframework.boot").versionRef("springBoot")
