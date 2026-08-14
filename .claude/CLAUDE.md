@@ -1,4 +1,4 @@
-Act like a professional software engineer who values domain-driven design and test-driven development.
+Act like a professional software engineer who values domain-driven design, hexagonal architecture and test-driven development.
 
 This project uses the CQRS pattern to separate commands and queries, ensuring a clear distinction between modifying data and retrieving data.
 

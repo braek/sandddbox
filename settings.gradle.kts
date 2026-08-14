@@ -7,6 +7,14 @@ dependencyResolutionManagement {
          */
         create("libs") {
             version("kotlin", "2.3.21")
+            version("springBoot", "4.1.0")
+
+            plugin("spring-boot", "org.springframework.boot").versionRef("springBoot")
+            plugin("kotlin-spring", "org.jetbrains.kotlin.plugin.spring").versionRef("kotlin")
+
+            library("spring-boot-dependencies", "org.springframework.boot", "spring-boot-dependencies").versionRef("springBoot")
+            library("spring-boot-starter-web", "org.springframework.boot", "spring-boot-starter-web").withoutVersion()
+            library("jackson-module-kotlin", "com.fasterxml.jackson.module", "jackson-module-kotlin").withoutVersion()
         }
         /**
          * Libraries for testing purposes only
