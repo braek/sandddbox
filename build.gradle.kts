@@ -3,11 +3,6 @@
  */
 plugins {
     kotlin("jvm") version libs.versions.kotlin.get()
-    /**
-     * Registered at the root, so subprojects can apply them without repeating the version,
-     * but not applied here — only ```rest-adapter``` needs Spring Boot.
-     */
-    alias(libs.plugins.spring.boot) apply false
 }
 /**
  * Specify which JDK to build for
@@ -22,7 +17,6 @@ subprojects {
     apply(plugin = "kotlin")
 
     repositories {
-        mavenLocal()
         mavenCentral()
     }
 
