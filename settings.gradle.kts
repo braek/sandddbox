@@ -6,7 +6,7 @@ dependencyResolutionManagement {
          * Regular libraries
          */
         create("libs") {
-            version("kotlin", "2.4.10")
+            version("kotlin", "2.3.21")
         }
         /**
          * Libraries for testing purposes only
@@ -36,3 +36,6 @@ project(":queries").projectDir = file("src/application/queries")
 
 include(":test-doubles")
 project(":test-doubles").projectDir = file("src/test-doubles")
+
+include(":rest-adapter")
+project(":rest-adapter").projectDir = file("src/frontend-adapters/rest-adapter")
