@@ -6,14 +6,14 @@ dependencyResolutionManagement {
          * Regular libraries
          */
         create("libs") {
-            version("kotlin", "2.3.21")
+            version("kotlin", "2.4.10")
         }
         /**
          * Libraries for testing purposes only
          */
         create("testLibs") {
-            version("junit", "6.0.3")
-            version("assertj", "3.27.6")
+            version("junit", "6.1.3")
+            version("assertj", "3.27.7")
             library("assertj", "org.assertj", "assertj-core").versionRef("assertj")
         }
     }
