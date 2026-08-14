@@ -39,7 +39,7 @@ class CreateBookUseCase(
             authors = command.authors
         )
         repository.save(book)
-        eventPublisher.publish(book.getQueuedEvents())
+        eventPublisher.publish(book.getOutbox())
         presenter.created(book.getId())
     }
 }
