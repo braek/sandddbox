@@ -6,7 +6,7 @@ dependencyResolutionManagement {
          * Regular libraries
          */
         create("libs") {
-            version("kotlin", "2.4.10")
+            version("kotlin", "2.3.21")
         }
         /**
          * Libraries for testing purposes only
