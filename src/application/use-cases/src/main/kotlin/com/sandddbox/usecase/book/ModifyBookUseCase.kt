@@ -32,7 +32,7 @@ class ModifyBookUseCase(
                 authors = command.authors
             )
             repository.save(it)
-            eventPublisher.publish(it.getQueue())
+            eventPublisher.publish(it.getQueuedEvents())
             presenter.modified(command.bookId)
         } ?: presenter.bookDoesNotExist(command.bookId)
     }

@@ -5,15 +5,15 @@ import com.sandddbox.vocabulary.aggregate.AggregateRootId
 
 abstract class AggregateRoot<AGGREGATE_ROOT_ID : AggregateRootId> {
 
-    private val queue: MutableList<Event> = mutableListOf()
+    private val enqueuedEvents: MutableList<Event> = mutableListOf()
 
     abstract fun getId(): AGGREGATE_ROOT_ID
 
     protected fun enqueue(event: Event) {
-        this.queue.add(event)
+        this.enqueuedEvents.add(event)
     }
 
-    fun getQueue(): List<Event> {
-        return queue.toList()
+    fun getQueuedEvents(): List<Event> {
+        return enqueuedEvents.toList()
     }
 }
