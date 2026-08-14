@@ -2,7 +2,7 @@ package com.sandddbox.vocabulary.network
 
 import com.sandddbox.vocabulary.sanitizeSingleLineString
 
-class DnsName private constructor(str: String) : Seed, Comparable<DnsName> {
+class DnsName private constructor(str: String) : Target, Comparable<DnsName> {
 
     private val value: String
     private val dnsLabels: List<DnsLabel>

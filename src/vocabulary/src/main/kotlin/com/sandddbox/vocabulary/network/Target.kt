@@ -1,6 +1,6 @@
 package com.sandddbox.vocabulary.network
 
-sealed interface Seed {
+sealed interface Target {
 
     override fun toString(): String
 

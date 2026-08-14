@@ -1,6 +1,6 @@
 package com.sandddbox.vocabulary.network
 
-class CIDR : Seed {
+class CIDR : Target {
     override fun toString(): String {
         TODO("Not yet implemented")
     }
