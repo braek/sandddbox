@@ -22,14 +22,14 @@ subprojects {
 
     dependencies {
         /**
+         * Library for prettier assertions
+         */
+        testImplementation(rootProject.testLibs.assertj)
+        /**
          * JUnit APIs for WRITING tests
          */
         testImplementation("org.junit.jupiter:junit-jupiter:${rootProject.testLibs.versions.junit.get()}")
         testImplementation("org.junit.jupiter:junit-jupiter-params:${rootProject.testLibs.versions.junit.get()}")
-        /**
-         * API for better assertions
-         */
-        testImplementation(rootProject.testLibs.assertj)
         /**
          * JUnit Engine and Launcher for RUNNING tests
          */
