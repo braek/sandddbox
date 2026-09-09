@@ -58,7 +58,7 @@ class ModifyBookUseCaseTest {
                         title = title,
                         description = description,
                         authors = authors,
-                        Version.initial()
+                        Version.create()
                     )
                 )
             )
@@ -183,7 +183,7 @@ class ModifyBookUseCaseTest {
                         title = title,
                         description = description,
                         authors = authors,
-                        version = Version.initial()
+                        version = Version.create()
                     )
                 )
             )
@@ -210,7 +210,7 @@ class ModifyBookUseCaseTest {
                     newTitle,
                     newDescription,
                     newAuthors,
-                    Version.initial().increment().increment()
+                    Version.create().increment().increment()
                 )
             )
         }

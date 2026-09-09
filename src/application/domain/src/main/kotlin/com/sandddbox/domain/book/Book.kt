@@ -49,7 +49,7 @@ class Book private constructor(
                 title = title,
                 description = description,
                 authors = authors.toMutableSet(),
-                version = Version.initial()
+                version = Version.create()
             )
             book.enqueue(BookCreated(book.getId()))
             return book

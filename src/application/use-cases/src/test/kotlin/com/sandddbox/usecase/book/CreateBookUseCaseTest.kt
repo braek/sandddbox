@@ -75,7 +75,7 @@ class CreateBookUseCaseTest {
                 title,
                 description,
                 authors,
-                Version.initial().increment()
+                Version.create().increment()
             ))
         }
 

@@ -18,12 +18,12 @@ class MockBookRepository : BookRepository, ISBNService {
     }
 
     override fun save(aggregateRoot: Book) {
-        val bookSnapshot = aggregateRoot.takeSnapshot()
-        data.compute(bookSnapshot.id) { _, existing ->
-            if (existing != null && existing.version != bookSnapshot.version) {
-                throw IllegalStateException("Optimistic locking failed for book with id: ${bookSnapshot.id}")
+        val snapshot = aggregateRoot.takeSnapshot()
+        data.compute(snapshot.id) { _, existing ->
+            if (existing != null && existing.version != snapshot.version) {
+                throw IllegalStateException("Optimistic locking failed for book with id: ${snapshot.id}")
             }
-            bookSnapshot.copy(version = bookSnapshot.version.increment())
+            snapshot.copy(version = snapshot.version.increment())
         }
     }
 
